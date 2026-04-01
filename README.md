@@ -1,74 +1,30 @@
-# Cortex Demos
+# Cortex Code Skills
 
-A collection of Cortex Code skills demonstrating data engineering workflows with Snowflake and Coalesce.
+A collection of custom [Cortex Code](https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code) skills for working with Snowflake and Coalesce.
 
 ## Skills
 
-### Snowflake Data Loader
+| Skill | Description |
+|-------|-------------|
+| [snowflake-data-loader](.cortex/skills/snowflake-data-loader/) | Scan local folders and load data files (CSV, JSON, Parquet, Excel) into Snowflake with automatic schema inference. |
+| [coalesce-pipeline-builder](.cortex/skills/coalesce-pipeline-builder/) | Build data transformation pipelines in Coalesce — Stage, Dimension, Fact, and View nodes with SQL transforms, business keys, and star schema support. |
+| [coalesce-job-failure-investigation](.cortex/skills/coalesce-job-failure-investigation/) | Diagnose Coalesce pipeline run failures — identify root cause, inspect failing SQL, apply fixes, and verify with a retry run. |
 
-Scan local folders and load data files into Snowflake with automatic schema inference.
+## Getting Started
 
-**Supported formats:** CSV / TSV, JSON / JSONL / NDJSON, Parquet, Excel (.xlsx / .xls)
+1. Clone this repo into your working directory.
+2. Open [Cortex Code](https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code) in the same directory. Skills in `.cortex/skills/` are automatically detected.
+3. Ask Cortex Code to perform a task that matches a skill's description, and it will invoke the skill.
 
-**How it works:**
-1. Scan a folder for supported data files
-2. Infer Snowflake-compatible schema from file contents
-3. Review and confirm column names/types
-4. Create tables and load data automatically
-
-```
-.cortex/skills/snowflake-data-loader/
-├── SKILL.md
-├── scripts/
-│   ├── infer_schema.py       # Schema inference from files
-│   ├── generate_load_sql.py  # SQL generation (CSV, JSON, Parquet)
-│   └── upload_dataframe.py   # Direct pandas upload (Excel)
-└── references/
-    └── type-mapping.md       # Type mapping and format reference
-```
-
----
-
-### Coalesce Pipeline Builder
-
-Build data transformation pipelines in Coalesce from source tables — creating Stage, Dimension, Fact, or View nodes with SQL transforms, business keys, JOIN conditions, and column logic. Supports both single-entity pipelines and full star schemas.
-
-**How it works:**
-1. Collect requirements (workspace ID, source table, pipeline spec)
-2. Orient — list workspace nodes, inspect existing patterns
-3. Create Stage node(s) and apply column transforms
-4. Create downstream nodes (Dimension, Fact, or View)
-5. Configure business keys, JOIN conditions, and run verification
-
-```
-.cortex/skills/coalesce-pipeline-builder/
-└── SKILL.md
-```
-
----
-
-### Coalesce Job Failure Investigation
-
-Diagnose why a Coalesce pipeline run failed — identify the root cause, inspect failing SQL, and guide toward a fix. Can optionally apply the fix and verify with a retry run.
-
-**How it works:**
-1. Find failed runs (or use a provided run ID)
-2. Investigate the failure — root cause, failing nodes, downstream impact
-3. Inspect the failing node's SQL
-4. Recommend (and optionally apply) a fix
-5. Optionally retry the run to verify the fix
-
-```
-.cortex/skills/coalesce-job-failure-investigation/
-└── SKILL.md
-```
-
----
+Each skill has its own `SKILL.md` with detailed workflow documentation and usage instructions.
 
 ## Sample Data
 
-```
-data/
-├── employee_hr_data_2025.xlsx
-└── sales_transactions_2025.xlsx
-```
+The `data/` directory contains sample datasets for testing skills:
+
+| File | Description |
+|------|-------------|
+| `employee_hr_data_2025.xlsx` | 200 rows of synthetic employee HR data (names, departments, salaries, etc.) |
+| `sales_transactions_2025.xlsx` | 500 rows of synthetic sales transaction data (products, quantities, revenue, etc.) |
+
+These are synthetic datasets with no real PII. They were loaded into `SAMPLE_DATA.LOAD` as `EMPLOYEE_HR_DATA_25` and `SALES_TRANSACTIONS_25` using the snowflake-data-loader skill.

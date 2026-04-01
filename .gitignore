@@ -1,0 +1,23 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Secrets & credentials
+.env
+*.key
+*.pem
+credentials.*
+
+# Screenshots (may contain account identifiers)
+*.png
+*.jpg
+*.jpeg
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp files
+/tmp/
